@@ -62,7 +62,7 @@ class BigInteger {
             } else {
                 p *= 10;
             }
-            digits[digitPos] += p * static_cast<int>(s[s.size() - i - 1] - '0');
+            digits[digitPos] += p * (s[s.size() - i - 1] - '0');
         }
         while (!digits.empty() && digits.back() == 0) {
             digits.pop_back();
@@ -327,13 +327,13 @@ class BigInteger {
         }
         std::vector<std::complex<double>> from_angles(a.size());
         for (size_t x = 0; x < l; ++x) {
-            for (size_t j = 0; j < (1 << x); ++j) {
+            for (size_t j = 0; j < static_cast<size_t>(1 << x); ++j) {
                 from_angles[j] = from_angle((2 * (std::numbers::pi / static_cast<double>((1ll << (x + 1))))
                     * static_cast<double>(j)));
             }
             for (size_t i = 0; i < a.size(); i += (1 << (x + 1))) {
                 size_t i1 = i + (1 << x);
-                for (size_t j = 0; j < (1 << x); ++j) {
+                for (size_t j = 0; j < static_cast<size_t>(1 << x); ++j) {
                     std::complex<double> c = from_angles[j];
                     std::complex<double> res1 = a[i + j] + c * a[i1 + j];
                     std::complex<double> res2 = a[i + j] - c * a[i1 + j];
